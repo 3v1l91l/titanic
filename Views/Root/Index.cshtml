@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body style="padding-top: 70px">
+    <div>
+     <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Predict Titanic crash outcome</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> 
+
+    <div class="container">    
+        <form class="col-5" action="Submit" method="POST">
+            <div class="form-group row">
+            <label for="fare" class="col-2 col-form-label">Fare</label>
+            <div class="col-2">
+                <input class="form-control" type="number" value="10" id="fare" name="fare">
+            </div>
+            </div>
+            <div class="form-group row">
+                <label for="age" class="col-2 col-form-label">Age</label>
+                <div class="col-2">
+                    <input class="form-control" type="number" value="20" id="age" name="age">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
