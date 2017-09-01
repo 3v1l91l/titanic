@@ -21,7 +21,7 @@ namespace src.Controllers
             bool prediction = false;
             try
             {
-                prediction = Predict(model.Fare, model.Age).Result;
+                prediction = Predict(model.Fare, model.Age, model.Sex, model.PassengerClass).Result;
             }
             catch (Exception e)
             {
@@ -36,7 +36,7 @@ namespace src.Controllers
         public IActionResult Index() {
             return View();
         }
-        static async Task<bool> Predict(int fare, int age) {
+        static async Task<bool> Predict(int fare, int age, string sex, string passengerClass) {
             using (var client = new HttpClient())
             {
                 var scoreRequest = new 
@@ -50,6 +50,12 @@ namespace src.Controllers
                                             },
                                             {
                                                 "Age", age.ToString()
+                                            },
+                                            {
+                                                "Sex", sex.ToString()
+                                            },
+                                            {
+                                                "Pclass", passengerClass.ToString()
                                             },
                                             {
                                                 "Survived", "1"

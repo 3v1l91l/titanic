@@ -6,5 +6,7 @@ namespace src.Models
     {
         public int Fare { get; set; }
         public int Age { get; set; }
+        public string Sex { get; set; }
+        public string PassengerClass { get; set; }
     }
 }
