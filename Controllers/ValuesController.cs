@@ -75,9 +75,9 @@ namespace src.Controllers
                     string score = await response.Content.ReadAsStringAsync();
                     Data z = JsonConvert.DeserializeObject<Data>(score);
                 
-                    bool result;
-                    bool.TryParse(z.Results.output1.First()["Scored Labels"], out result);
-                    return result;
+                    int result;
+                    int.TryParse(z.Results.output1.First()["Scored Labels"], out result);
+                    return result == 1;
                 }
                 else
                 {
