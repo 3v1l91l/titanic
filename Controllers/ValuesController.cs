@@ -85,7 +85,7 @@ namespace src.Controllers
                     int result;
                     int.TryParse(z.Results.output1.First()["Scored Labels"], out result);
                     double precision;
-                    double.TryParse(z.Results.output1.First()["Scored Probabilities"], out precision);
+                    double.TryParse(z.Results.output1.First()["Scored Probabilities"], NumberStyles.Number, CultureInfo.InvariantCulture, out precision);
                     return new Tuple<bool, double>(result == 1, precision);
                 }
                 else
