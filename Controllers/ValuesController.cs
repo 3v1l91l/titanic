@@ -18,7 +18,7 @@ namespace src.Controllers
         [HttpPost("Submit")]
         public ActionResult Submit(Form model)
         {
-            bool prediction = false;
+            Tuple<bool, double> prediction = new Tuple<bool, double>(false, 0);
             try
             {
                 prediction = Predict(model.Fare, model.Age, model.Sex, model.PassengerClass).Result;
@@ -27,7 +27,8 @@ namespace src.Controllers
             {
                 Console.WriteLine(e);
             }
-            ViewData["Prediction"] = prediction ? "Alive" : "Dead";
+            ViewData["Prediction"] = prediction.Item1 ? "Alive" : "Dead";
+            ViewData["Precision"] = prediction.Item2;
             return View("Submit");
         }
 
@@ -36,7 +37,7 @@ namespace src.Controllers
         public IActionResult Index() {
             return View();
         }
-        static async Task<bool> Predict(int fare, int age, string sex, string passengerClass) {
+        static async Task<Tuple<bool, double>> Predict(int fare, int age, string sex, string passengerClass) {
             using (var client = new HttpClient())
             {
                 var scoreRequest = new 
@@ -83,11 +84,13 @@ namespace src.Controllers
                 
                     int result;
                     int.TryParse(z.Results.output1.First()["Scored Labels"], out result);
-                    return result == 1;
+                    double precision;
+                    int.TryParse(z.Results.output1.First()["Scored Probabilities"], out result);
+                    return new Tuple<bool, double>(result == 1, 0);
                 }
                 else
                 {
-                    return false;
+                    return new Tuple<bool, double>(false, 0);
                 }
 
             }
